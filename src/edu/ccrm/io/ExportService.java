@@ -1,21 +1,15 @@
 package edu.ccrm.io;
-
 import edu.ccrm.domain.Student;
 import edu.ccrm.domain.Course;
 import edu.ccrm.domain.Enrollment;
 import java.io.*;
 import java.nio.file.*;
 import java.util.List;
-
 public class ExportService {
-
-    
     public void exportData(String fileName, List<Student> students, List<Course> courses, List<Enrollment> enrollments) throws IOException {
         Path path = Paths.get("exports/" + fileName);
         Files.createDirectories(path.getParent());
-
         StringBuilder sb = new StringBuilder();
-
         sb.append("=== Courses ===\n");
         for (Course c : courses) {
             sb.append(c.getCode()).append(",")
@@ -24,7 +18,6 @@ public class ExportService {
               .append(c.getInstructor()).append(",")
               .append(c.isActive()).append("\n");
         }
-
         sb.append("\n=== Students ===\n");
         for (Student s : students) {
             sb.append(s.getId()).append(",")
@@ -32,7 +25,6 @@ public class ExportService {
               .append(s.getRegNo()).append(",")
               .append(s.isActive()).append("\n");
         }
-
         sb.append("\n=== Enrollments ===\n");
         for (Enrollment e : enrollments) {
             sb.append(e.getStudent().getId()).append(",")
@@ -40,12 +32,9 @@ public class ExportService {
               .append(e.getGrade() != null ? e.getGrade().toString() : "N/A")
               .append("\n");
         }
-
         Files.write(path, sb.toString().getBytes());
         System.out.println("Data exported to " + path.toAbsolutePath());
     }
-
-    
     public void importStudentsFromCSV(Path filePath, List<Student> students) throws IOException {
         if (!Files.exists(filePath)) {
             System.out.println("CSV file not found: " + filePath);
@@ -63,8 +52,6 @@ public class ExportService {
         }
         System.out.println("Imported " + students.size() + " students from CSV.");
     }
-
-    
     public void importCoursesFromCSV(Path filePath, List<Course> courses) throws IOException {
         if (!Files.exists(filePath)) {
             System.out.println("CSV file not found: " + filePath);

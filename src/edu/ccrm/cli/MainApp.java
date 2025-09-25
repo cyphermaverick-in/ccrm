@@ -1,11 +1,8 @@
 package edu.ccrm.cli;
-
 import edu.ccrm.domain.*;
 import edu.ccrm.service.*;
 import edu.ccrm.io.*;
-
 import java.util.Scanner;
-
 public class MainApp {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
